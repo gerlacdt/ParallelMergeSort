@@ -5,7 +5,7 @@ of a parallelized MergeSort with one, two and four threads.
 
 After building with ant:
 
-> ant
+      > ant
 
 You find the executable jar file in:
 
@@ -13,7 +13,7 @@ ${PROJECT_HOME}/build/jar/
 
 Then you can start the performance test with:
 
-> java -jar MergeSort.jar filename
+     > java -jar MergeSort.jar filename
 
 This prints the sorting durations for one, two and four parallel
 threads on the console. The sorted output will be saved in
