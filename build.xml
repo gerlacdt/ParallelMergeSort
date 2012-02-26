@@ -1,0 +1,53 @@
+<project name="MergeSort" basedir="." default="jar">
+
+	<property name="src.dir" value="src" />
+	<property name="testdata.dir" value="test_dir" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="jar.dir" value="${build.dir}/jar" />
+	<property name="main-class" value="sorter.Main" />
+
+	<property name="lib.dir" value="lib" />
+	<path id="classpath.base">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		
+		<delete>
+			<fileset dir="." includes="*.out" />
+			<fileset dir="${testdata.dir}" includes="*.out" />
+		</delete>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath.base" />
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}" />
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="test" depends="jar">
+		<junit printsummary="withOutAndErr">
+			<classpath>
+				<path refid="classpath.base" />
+				<path location="${jar.dir}/${ant.project.name}.jar" />
+			</classpath>
+
+			<batchtest fork="yes">
+				<fileset dir="${src.dir}" includes="**/*Test.java" />
+			</batchtest>
+		</junit>
+	</target>
+</project>
