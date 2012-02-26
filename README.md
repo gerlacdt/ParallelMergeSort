@@ -13,13 +13,13 @@ ${PROJECT_HOME}/build/jar/
 
 Then you can start the performance test with:
 
-> java -jar MergeSort.jar <filename>
+> java -jar MergeSort.jar filename
 
 This prints the sorting durations for one, two and four parallel
 threads on the console. The sorted output will be saved in
-<filename>_single.out, <filename>_dual.out, <filename>_quad.out.
+filename_single.out, filename_dual.out, filename_quad.out.
 
-The <filename> should be a big text file in order to get meaningful
+The filename should be a big text file in order to get meaningful
 test results.
 
 The MergeSort supports all data structures that implement the
